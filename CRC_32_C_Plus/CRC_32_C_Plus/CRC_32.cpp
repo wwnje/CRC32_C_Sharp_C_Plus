@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-unsigned int crcTable[256] = {
+unsigned int Crc32Table_1[256] = {
 	0x0, 0x77073096, 0xee0e612c, 0x990951ba, 0x76dc419, 0x706af48f, 0xe963a535, 0x9e6495a3,
 	0xedb8832, 0x79dcb8a4, 0xe0d5e91e, 0x97d2d988, 0x9b64c2b, 0x7eb17cbd, 0xe7b82d07, 0x90bf1d91,
 	0x1db71064, 0x6ab020f2, 0xf3b97148, 0x84be41de, 0x1adad47d, 0x6ddde4eb, 0xf4d4b551, 0x83d385c7,
@@ -35,8 +35,7 @@ unsigned int crcTable[256] = {
 	0xb3667a2e, 0xc4614ab8, 0x5d681b02, 0x2a6f2b94, 0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d,
 };
 
-
-unsigned int Crc32Table[256];
+unsigned int Crc32Table_2[256];
 
 void GetCRC32Table()
 {
@@ -53,24 +52,24 @@ void GetCRC32Table()
 			else
 				Crc >>= 1;
 		}
-		Crc32Table[i] = Crc;
+		Crc32Table_2[i] = Crc;
 	}
 }
 
-unsigned int getcrc(char *c, int len)
+unsigned int GetCRC32_1(char *c, int len)
 {
 	register unsigned int crc;
 	char *e = c + len;
 
 	crc = 0xFFFFFFFF;
 	while (c < e) {
-		crc = ((crc >> 8) & 0x00FFFFFF) ^ crcTable[(crc^ *c) & 0xFF];
+		crc = ((crc >> 8) & 0x00FFFFFF) ^ Crc32Table_1[(crc^ *c) & 0xFF];
 		++c;
 	}
 	return(crc ^ 0xFFFFFFFF);
 }
 
-unsigned int GetCRC32(char *c, int len)
+unsigned int GetCRC32_2(char *c, int len)
 {
 	//Éú³ÉÂë±í
 	GetCRC32Table();
@@ -80,7 +79,7 @@ unsigned int GetCRC32(char *c, int len)
 
 	crc = 0xFFFFFFFF;
 	while (c < e) {
-		crc = ((crc >> 8) & 0x00FFFFFF) ^ Crc32Table[(crc^ *c) & 0xFF];
+		crc = ((crc >> 8) & 0x00FFFFFF) ^ Crc32Table_2[(crc^ *c) & 0xFF];
 		++c;
 	}
 	return(crc ^ 0xFFFFFFFF);

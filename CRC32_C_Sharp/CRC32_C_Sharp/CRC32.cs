@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Text;
 
-namespace KernelCore.Utility.Encrypt
+namespace Utility.CRC32
 {
-    /// <summary>
-    /// CRC 效验
-    /// 快速检测算法
-    /// </summary>
     public sealed class CRC32
     {
         static UInt32[] crcTable = {
@@ -48,7 +44,7 @@ namespace KernelCore.Utility.Encrypt
 
         }
 
-        static protected UInt32[] Crc32Table;
+        static UInt32[] Crc32Table;
 
         static public void GetCRC32Table()
         {
@@ -84,7 +80,6 @@ namespace KernelCore.Utility.Encrypt
 
         static public uint GetCRC32_2(string sInputString)
         {
-            //生成码表
             GetCRC32Table();
             byte[] buffer = System.Text.ASCIIEncoding.ASCII.GetBytes(sInputString);
             UInt32 value = 0xffffffff;

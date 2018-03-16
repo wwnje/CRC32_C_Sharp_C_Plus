@@ -2,9 +2,9 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace CRC32_C_Sharp
+namespace Utility.MD5
 {
-    class Md5
+    class MD5
     {
         public static string GetMd5(string message)
         {
